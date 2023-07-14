@@ -142,7 +142,7 @@ export const AccordionBodyContent = (props) => {
                 {/*--for user view*/}
 
                 {/*for admin to update qty if no stock*/}
-                <div className={`${user[0]?.acc_type === 1 ? 'hidden' : 'flex flex-col items-center'}`}>
+                <div className={`${user?.acc_type === 1 ? 'hidden' : 'flex flex-col items-center'}`}>
                   <input onChange={handleQty(invoice_product, item)}
                          min="1"
                          className={`${props.invoice.status >= 2 && inputStyle} max-w-[64px] p-0 border text-center`}
