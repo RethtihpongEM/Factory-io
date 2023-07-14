@@ -6,6 +6,8 @@ import {ImageExpand} from "../ImageExpand.jsx";
 import {Accordion, AccordionBody, AccordionHeader} from "@material-tailwind/react";
 import {GoogleMap, MarkerF, useJsApiLoader} from "@react-google-maps/api";
 import {GoogleMapsContext} from "../../context/GoogleMapsContext.jsx";
+import UserContext from "@/context/UserContext.jsx";
+import {useAuthContext} from "@/context/AuthContext.jsx";
 
 const libraries = ['places'];
 export const AccordionBodyContent = (props) => {
@@ -18,7 +20,9 @@ export const AccordionBodyContent = (props) => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   // const {invProd, setInvProd} = props;
-  const {totalPrice, status, invoice_product, user, address, placeId} = props.invoice;
+  const {totalPrice, status, invoice_product, address, placeId} = props.invoice;
+
+  const {user} = useAuthContext();
 
   // useEffect(() => {
   //   console.log(invoice_product)
@@ -50,8 +54,8 @@ export const AccordionBodyContent = (props) => {
           text-[10px]
           gap-2 mb-3">
             <div className="flex justify-between">
-              <div>Username: {user[0].username}</div>
-              <div>Phone Number: {user[0].phoneNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "-")}
+              <div>Username: {props?.invoice?.user[0].username}</div>
+              <div>Phone Number: {props?.invoice?.user[0].phoneNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "-")}
               </div>
             </div>
             <Fragment>
@@ -132,7 +136,7 @@ export const AccordionBodyContent = (props) => {
                 </svg>
                 {/*for user view*/}
                 <div
-                  className={`${user[0]?.acc_type === 1 && 'text-sm'}`}>
+                  className={`${user?.acc_type === 1 ? 'text-sm' : 'hidden'}`}>
                   {item.qty}
                 </div>
                 {/*--for user view*/}
