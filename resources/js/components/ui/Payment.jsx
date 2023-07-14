@@ -7,6 +7,7 @@ import CheckoutButton from "../Modals/CheckoutButton.jsx";
 import {Link} from "react-router-dom";
 import * as React from "react";
 import {GoogleMapsContext} from "../../context/GoogleMapsContext.jsx";
+import {ImageExpand} from "@/components/ImageExpand.jsx";
 
 export const Payment = () => {
   const {totalPrice} = useContext(CartContext);
@@ -21,14 +22,16 @@ export const Payment = () => {
     setSelected(Number(event.target.value));
   };
 
+  const [imgExpand, setImgExpand] = useState(false);
+
   return (
     <>
       {/*google map and exchange rate ui*/}
-      <div className="2xl:px-48 xl:px-24 lg:px-20 md:px-12 md:flex justify-between md:mb-12">
+      <div className="lg:px-16 md:px-12 md:flex justify-between md:mb-12">
         <div className="md:w-[50%] w-full md:mb-0 mb-3">
           <GoogleMaps height={250}/>
         </div>
-        <div className="text-xl flex flex-col items-end px-6">
+        <div className="md:text-xl text-base flex flex-col items-end px-6">
           <div>
             <span className="underline underline-offset-[2px]">Exchange Rate:</span> <span
             className="font-bold text-grayFactory">&#x17DB;{(4100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
@@ -40,10 +43,11 @@ export const Payment = () => {
           </div>
         </div>
       </div>
+
       {/*payment ui*/}
       <div
-        className="bg-tealActive min-[1920px]:px-48 lg:px-12
-        lg:flex lg:justify-between lg:border lg: border-blackFactory
+        className="bg-tealActive lg:px-12
+        lg:flex lg:justify-between lg:border border-blackFactory
         md:py-6 md:flex md:flex-row md:justify-around md:items-start
         p-2 flex flex-col gap-2 justify-center overflow-hidden">
         {/*left section parent*/}
@@ -106,7 +110,7 @@ export const Payment = () => {
             <label
               className="cursor-pointer lg:inline-flex md:px-3 md:py-1 md:w-60
                 flex px-2 py-[0.1rem] bg-whiteFactory rounded-lg text-[#989A9C]
-                md:text-base text-[12px]" htmlFor="files">
+                md:text-base text-[12px] w-fit" htmlFor="files">
               Select Image
               <input className='hidden' type="file"
                      id="files" accept="image/*"
@@ -128,8 +132,12 @@ export const Payment = () => {
             {paymentPic &&
               <>
                 <div className="">
-                  <img className="md:w-[250px] object-contain"
+                  <img onClick={(e) => {
+                   e.stopPropagation();
+                   setImgExpand(true);
+                  }} className="md:w-[250px] object-contain"
                        src={URL.createObjectURL(paymentPic)} alt=""/>
+                  <ImageExpand imgSrc={URL.createObjectURL(paymentPic)} open={imgExpand} setOpen={setImgExpand}/>
                 </div>
                 <div className="flex gap-x-2">
                   <button className="rounded-md md:text-base text-[14px] bg-redHover text-whiteFactory px-2 py-1"
@@ -159,8 +167,9 @@ export const Payment = () => {
 
       <div className="flex justify-between sm:px-12 mt-6 ">
         <Link
-          className={`transition px-2 py-1 shadow-md shadow-blueBase duration-500 font-semibold text-blueActive text-center cursor-pointer hover:text-whiteFactory hover:bg-blueBase`}
-          to={'/maker-io'}>
+          className={`transition px-2 py-1 shadow-md shadow-blueBase duration-500 font-semibold text-blueActive flex justify-center items-center cursor-pointer hover:text-whiteFactory hover:bg-blueBase
+          md:text-base text-sm`}
+          to={'/shop'}>
           Browse product
         </Link>
         <div className="flex items-center gap-x-2">

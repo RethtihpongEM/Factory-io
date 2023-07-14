@@ -104,6 +104,7 @@ export const ChatProvider = ({children}) => {
     const currentDate = tempDate.getFullYear() + '-' + (tempDate.getMonth() + 1) + '-' + tempDate.getDate() + ' ' + tempDate.getHours() + ':' + tempDate.getMinutes() + ':' + tempDate.getSeconds();
     setLoadingSend(true);
     if (messageImage || messageInput !== '') {
+      console.log(messageInput)
       // console.log(loadingSend)
       messagePost.msg_content = messageInput;
       messagePost.image = messageImage;
@@ -120,7 +121,7 @@ export const ChatProvider = ({children}) => {
           headers: {'Content-Type': "multipart/form-data"}
         }).then(async () => {
           await messageReFetch();
-          await chatReFetch()
+          await chatReFetch();
           clearMessage();
           setLoadingSend(false);
         });

@@ -5,6 +5,7 @@ import {useQuery} from "@tanstack/react-query";
 import {useAuthContext} from "../AuthContext.jsx";
 import axiosClient from "../../axios-client.js";
 import {useProjectProtoContext} from "./ProjectProtoContext.jsx";
+import ChatContext from "../../context/ChatContext.jsx";
 
 Axios.defaults.baseURL = import.meta.env.VITE_APP_URL + "/api/v1/";
 const StateContext = createContext();
@@ -241,14 +242,15 @@ export const ProjectContext = ({children}) => {
   }
 
   const deleteProject = async (project) => {
-    console.log(project?.id);
     setIsPosting(true);
+
     await Axios.delete(`projects/${project?.id}`).then(() => {
       setIsPosting(false);
       reFetchAll();
     }).catch((e) => {
       console.log(e.response.data.errors);
     })
+    setIsPosting(false)
   }
   return (
     <>

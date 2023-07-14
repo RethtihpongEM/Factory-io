@@ -21,11 +21,13 @@ export const ProjectTab = () => {
 
   return (
     <div className={'transition duration-500 flex flex-col gap-4'}>
-      {prototypeList?.map((prototype, key) => {
-        return (
-          <PrototypeView key={key} id={key} prototype={prototype}/>
-        )
-      })}
+      <div className={"grid grid-cols-1 gap-4 auto-rows-fr"}>
+        {prototypeList?.map((prototype, key) => {
+          return (
+            <PrototypeView key={key} id={key} prototype={prototype}/>
+          )
+        })}
+      </div>
       <button onClick={(e) => {
         e.stopPropagation();
         setOpen(!open);

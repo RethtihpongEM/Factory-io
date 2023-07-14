@@ -45,7 +45,7 @@ export const CartItem = (props) => {
         {/*item descriptions*/}
         <div>
           <div className="mb-1 font-bold text-blueBase">${item.price}</div>
-          <Link to={`/makerio/${item.id}`}>
+          <Link to={`/item/${item.id}`}>
             <div className="highlight-hover transition duration-150 mb-1 text-tealHover font-bold">{item.name}</div>
           </Link>
           <div className="mb-1 text-blackFactory">Item Type: {item.type}</div>

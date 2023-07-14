@@ -39,47 +39,47 @@ import {NotificationView} from "./views/Factoryio/NotificationView.jsx";
 import {DashboardProject} from "./views/Dashboard/DashboardProject.jsx";
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <LandingLayout/>,
-    children: [
-      {
-        path: '',
-        element: <LandingPage/>
-      },
-      {
-        path: 'community',
-        element: <Communitylanding/>
-      },
-      {
-        path: 'rd',
-        element: <RnDLanding/>
-      },
-      {
-        path: 'contest',
-        element: <ContestLanding/>
-      },
-      {
-        path: 'user',
-        element: <AccountView/>
-      },
-      {
-        path: 'explore',
-        element: <FactoryHome/>
-      },
-      {
-        path: 'notification',
-        element: <NotificationView/>,
-      },
-      {
-        path: 'project/:id',
-        element: <ProjectView/>
-      }
-    ]
-  },
+  // {
+  //   path: '/',
+  //   element: <LandingLayout/>,
+  //   children: [
+  //     {
+  //       path: '',
+  //       element: <LandingPage/>
+  //     },
+  //     {
+  //       path: 'community',
+  //       element: <Communitylanding/>
+  //     },
+  //     {
+  //       path: 'rd',
+  //       element: <RnDLanding/>
+  //     },
+  //     {
+  //       path: 'contest',
+  //       element: <ContestLanding/>
+  //     },
+  //     {
+  //       path: 'user',
+  //       element: <AccountView/>
+  //     },
+  //     {
+  //       path: 'explore',
+  //       element: <FactoryHome/>
+  //     },
+  //     {
+  //       path: 'notification',
+  //       element: <NotificationView/>,
+  //     },
+  //     {
+  //       path: 'project/:id',
+  //       element: <ProjectView/>
+  //     }
+  //   ]
+  // },
 
   {
-    path: '/makerio',
+    path: '/',
     element: <MakerLayout/>,
     children: [
       {
@@ -93,7 +93,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorBoundary/>
       },
       {
-        path: '/makerio/:id',
+        path: '/item/:id',
         element: <ItemView/>,
         errorElement: <ErrorBoundary/>
       },

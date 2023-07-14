@@ -61,10 +61,10 @@ export const AccordionBodyContent = (props) => {
                   await handleOpen()
                 }}>
                   <div className="flex items-center justify-between bg-tealActive px-2 py-1 rounded-lg w-full">
-                    <div className='text-sm text-whiteFactory'>
+                    <div className='md:text-sm text-[10px] text-whiteFactory'>
                       {address}
                     </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="md:w-6 md:h-6 w-4 h-4">
                       <path className="text-blueActive" strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path className="text-blueActive" strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
@@ -132,12 +132,13 @@ export const AccordionBodyContent = (props) => {
                 </svg>
                 {/*for user view*/}
                 <div
-                  className={`${user?.acc_type !== 1 && 'hidden'} lg:max-w-[32px] lg:text-sm md:text-xs md:max-w-[20px] max-w-[12px]`}>
+                  className={`${user[0]?.acc_type === 1 && 'text-sm'}`}>
                   {item.qty}
                 </div>
                 {/*--for user view*/}
+
                 {/*for admin to update qty if no stock*/}
-                <div className="flex flex-col items-center gap-2">
+                <div className={`${user[0]?.acc_type === 1 ? 'hidden' : 'flex flex-col items-center'}`}>
                   <input onChange={handleQty(invoice_product, item)}
                          min="1"
                          className={`${props.invoice.status >= 2 && inputStyle} max-w-[64px] p-0 border text-center`}

@@ -28,7 +28,7 @@ export const PendingItem = (props) => {
               }
             </div>
             <div>
-              <Link to={`/makerio/${products[0].id}`}>
+              <Link to={`/item/${products[0].id}`}>
                 <div
                   className="highlight-hover transition duration-150 mb-1 text-tealHover md:leading-0 leading-5 font-bold">{name}
                   <sup

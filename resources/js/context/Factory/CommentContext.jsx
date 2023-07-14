@@ -73,6 +73,7 @@ export const CommentContext = ({children}) => {
         console.log(e.response.data.errors)
       })
     }
+    setPostCmtLoading(false)
   }
 
   const handlePicture = (event) => {

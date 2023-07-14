@@ -12,8 +12,8 @@ import {InvoiceProvider} from "./context/InvoiceContext.jsx";
 import {InvoiceProductProvider} from "./context/InvoiceProductContext.jsx";
 import {UserProvider} from "./context/UserContext.jsx";
 import {
-    QueryClient,
-    QueryClientProvider,
+  QueryClient,
+  QueryClientProvider,
 } from "@tanstack/react-query";
 import {ChatProvider} from "./context/ChatContext.jsx";
 import {GoogleMapsProvider} from "./context/GoogleMapsContext.jsx";
@@ -26,38 +26,38 @@ import {BackProjectProvider} from "./context/BackProjectContext.jsx";
 
 const client = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <QueryClientProvider client={client}>
-            <AuthContext>
-                <UserProvider>
-                    <GoogleMapsProvider>
-                        <CommentContext>
-                            <ProjectProtoContext>
-                                <ProjectContext>
-                                    <ChatProvider>
-                                        <InvoiceProductProvider>
-                                            <InvoiceProvider>
-                                                <ProductProvider>
-                                                    <CartProvider>
-                                                        <BackProjectProvider>
-                                                            <FundingProvider>
-                                                                <DonateProvider>
-                                                                    <RouterProvider router={router}/>
-                                                                </DonateProvider>
-                                                            </FundingProvider>
-                                                        </BackProjectProvider>
-                                                    </CartProvider>
-                                                </ProductProvider>
-                                            </InvoiceProvider>
-                                        </InvoiceProductProvider>
-                                    </ChatProvider>
-                                </ProjectContext>
-                            </ProjectProtoContext>
-                        </CommentContext>
-                    </GoogleMapsProvider>
-                </UserProvider>
-            </AuthContext>
-        </QueryClientProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <QueryClientProvider client={client}>
+      <AuthContext>
+        <UserProvider>
+          <GoogleMapsProvider>
+            <CommentContext>
+              <ProjectProtoContext>
+                <ProjectContext>
+                  <ChatProvider>
+                    <InvoiceProductProvider>
+                      <InvoiceProvider>
+                        <ProductProvider>
+                          <CartProvider>
+                            <BackProjectProvider>
+                              <FundingProvider>
+                                <DonateProvider>
+                                  <RouterProvider router={router}/>
+                                </DonateProvider>
+                              </FundingProvider>
+                            </BackProjectProvider>
+                          </CartProvider>
+                        </ProductProvider>
+                      </InvoiceProvider>
+                    </InvoiceProductProvider>
+                  </ChatProvider>
+                </ProjectContext>
+              </ProjectProtoContext>
+            </CommentContext>
+          </GoogleMapsProvider>
+        </UserProvider>
+      </AuthContext>
+    </QueryClientProvider>
+  </React.StrictMode>
 );
 

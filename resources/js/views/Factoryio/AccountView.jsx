@@ -21,7 +21,7 @@ export const AccountView = () => {
   if (token) {
     return (
       <main className="flex flex-col items-center">
-        <section className="min-w-[900px] flex flex-col gap-6">
+        <section className="w-full flex flex-col gap-6">
           <section className="shadow-xl">
             {/*cover picture*/}
             <section className="flex justify-center">
@@ -33,28 +33,28 @@ export const AccountView = () => {
             <section className="relative p-4 flex justify-between">
               {/*user pf*/}
               <div
-                className="absolute left-10 top-[-170px] shadow-blackFactory w-[200px] bg-whiteFactory h-[200px] rounded-[50%] shadow-md">
+                className="overflow-hidden absolute left-10 top-[-170px] shadow-blackFactory w-[200px] bg-whiteFactory h-[200px] rounded-[50%] shadow-md">
                 <img src={`https://robohash.org/${user.username}`} alt=""/>
               </div>
 
               <div className="px-6 mt-6 flex flex-col gap-[0.1rem] tracking-wide">
                 <span className="font-bold text-2xl">{user?.firstName + " " + user?.lastName}</span>
-                <span className="font-semibold text-lg">{user?.bio}</span>
-                <span className="text-gray-500">Test address, address for testing{user?.address}</span>
+                <span className="text-sm text-grayFactory">{user?.bio}</span>
+                {/*<span className="text-gray-500">Test address, address for testing{user?.address}</span>*/}
               </div>
 
-              <div className="flex flex-col justify-between">
-                <div className="text-[#3C3C3C] flex items-center ">
-                  <div className="flex flex-col items-center">
+              <div className="flex flex-col justify-between gap-1">
+                <div className="text-[#3C3C3C] flex items-center">
+                  <div className="flex flex-col items-center border-r-2 border-blackFactory pr-4">
                     <span>Follower</span>
-                    <span className="text-blackFactory font-semibold">10000</span>
+                    <span className="text-blackFactory font-semibold">0</span>
                   </div>
                   {/*stick*/}
-                  <span
-                    className="w-[50px] h-0 border-[0.1rem] rounded-md  border-solid border-blackFactory transform rotate-90"></span>
-                  <div className="flex flex-col items-center">
+                  {/*<span*/}
+                  {/*  className="w-[50px] h-0 border-[0.1rem] rounded-md  border-solid border-blackFactory transform rotate-90"></span>*/}
+                  <div className="pl-4 flex flex-col items-center">
                     <span>Following</span>
-                    <span className="text-blackFactory font-semibold">10000</span>
+                    <span className="text-blackFactory font-semibold">0</span>
                   </div>
                 </div>
 

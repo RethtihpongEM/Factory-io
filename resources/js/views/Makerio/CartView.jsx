@@ -69,6 +69,12 @@ export const CartView = () => {
     defaultAddress(user);
   }, [])
 
+  const DropDownLabel = () => {
+    return (
+      <span className={"text-[12px]"}>Select Address</span>
+    )
+  }
+
   return (
     <div>
       {/*<AddressForm />*/}
@@ -78,12 +84,12 @@ export const CartView = () => {
             xl:w-[50%]
             lg:w-[60%] lg:text-base
             md:w-[60%] md:text-xs">
-          <div className={`flex ${cartItem.length <= 0 && 'hidden'}`}>
-            <div className="w-[205px]">
-              <Dropdown style={{padding: 0, border: "none", backgroundColor: "#18264B"}} label={'Select Address'}>
+          <div className={`md:flex-row md:gap-0 flex flex-col gap-2 ${cartItem.length <= 0 && 'hidden'}`}>
+            <div className="whitespace-nowrap md:self-center self-end">
+              <Dropdown style={{padding: 0, border: "none", backgroundColor: "#18264B"}} label={<DropDownLabel/>}>
                 {userAddress?.filter(address => address.user_id === user?.id)?.map(address => {
                   return (
-                    <Dropdown.Item onClick={() => {
+                    <Dropdown.Item dismissOnClick={true} onClick={() => {
                       setAddress(address.address)
                       setPlaceId(address.placeId)
                       getLtLgPl(address.placeId)
@@ -97,9 +103,9 @@ export const CartView = () => {
                 </Dropdown.Item>
               </Dropdown>
             </div>
-            <div className="relative w-full">
+            <div className="w-full flex flex-col">
               <textarea ref={ref} id="search-dropdown"
-                        className={"w-full ring-2 ring-tealHover font-semibold bg-tealActive text-blackFactory px-3 py-2 rounded-md"}
+                        className={"w-full text-sm ring-2 ring-tealHover font-semibold bg-tealActive text-blackFactory px-3 py-2 rounded-md"}
                         value={address}
                         onChange={event => handleAddressChange(event)}
                         placeholder="#, Street No., ..." required>
@@ -122,7 +128,7 @@ export const CartView = () => {
       </div>
       <Link
         className={`${cartItem.length > 0 && 'hidden'} transition px-2 py-1 shadow-md shadow-blueBase duration-500 font-semibold text-blueActive cursor-pointer hover:text-whiteFactory hover:bg-blueBase`}
-        to={'/makerio/shop'}>
+        to={'/shop'}>
         Browse product
       </Link>
       <div className={`${cartItem.length === 0 && 'hidden'}`}>

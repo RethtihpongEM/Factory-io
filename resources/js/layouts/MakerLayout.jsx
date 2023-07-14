@@ -50,7 +50,7 @@ export const MakerLayout = () => {
           <div className="min-h-screen flex flex-col overflow-auto">
             <NavBar/>
             <main className="
-          min-[1920px]:px-36
+          min-[1880px]:px-96
           xl:pb-8
           lg:px-16
           md:px-6 md:pt-24 md:pb-2
@@ -79,7 +79,7 @@ export const MakerLayout = () => {
         <div className="min-h-screen flex flex-col overflow-auto">
           <NavBar/>
           <main className="
-          min-[1920px]:px-36
+          min-[1880px]:px-96
           xl:pb-8
           lg:px-16
           md:px-6 md:pt-24 md:pb-2

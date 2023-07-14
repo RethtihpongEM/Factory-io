@@ -23,6 +23,12 @@ export const OrderView = () => {
     setOpen(open === value ? 0 : value);
   };
 
+  const {scrollTop} = useContext(InvoiceContext);
+
+  useEffect(() => {
+    scrollTop(0);
+  })
+
   const Invoice = ({invoice}) => {
     return (
       <div key={invoice.id} className="px-2 border-l-2 border-b-2 border-tealBase mb-6">
@@ -78,7 +84,7 @@ export const OrderView = () => {
     if (invoices?.filter((invoice) => invoice.user_id === user?.id).length === 0) {
       return (
         <main>
-          No orders have been placed yet <Link to={'/maker-io'}></Link>
+          No orders have been placed yet <Link to={'/'}></Link>
         </main>
       );
     } else {
@@ -96,7 +102,7 @@ export const OrderView = () => {
             {invoices?.filter((invoice) => {
               return (invoice.user_id === user?.id && invoice.status === 3)
             }).length === 0 && (
-              <div>No orders have arrived yet... <Link className="text-tealHover font-semibold" to="/makerio/shop"><br/>Maybe
+              <div>No orders have arrived yet... <Link className="text-tealHover font-semibold" to="/shop"><br/>Maybe
                 be browse some more products?</Link></div>
             )}
 

@@ -16,12 +16,12 @@ export const DropdownMenu = ({user, cartItem, orders}) => {
                           color="#048D95"/>
                   </svg>}>
         <Dropdown.Item>
-          <Link to="/makerio/shop">
+          <Link to="shop">
             <div className="flex items-center gap-x-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 35 35" fill="none">
                 <path
                   d="M29.1667 27.7087V15.3128C29.1667 15.0864 29.114 14.8631 29.0127 14.6606C28.9115 14.4581 28.7645 14.282 28.5833 14.1462L18.375 6.48991C18.1226 6.30058 17.8156 6.19824 17.5 6.19824C17.1845 6.19824 16.8774 6.30058 16.625 6.48991L6.41668 14.1462C6.23556 14.282 6.08855 14.4581 5.9873 14.6606C5.88605 14.8631 5.83334 15.0864 5.83334 15.3128V27.7087C5.83334 28.0954 5.98699 28.4664 6.26048 28.7399C6.53397 29.0133 6.9049 29.167 7.29168 29.167H13.125C13.5118 29.167 13.8827 29.0133 14.1562 28.7399C14.4297 28.4664 14.5833 28.0954 14.5833 27.7087V23.3337C14.5833 22.9469 14.737 22.576 15.0105 22.3025C15.284 22.029 15.6549 21.8753 16.0417 21.8753H18.9583C19.3451 21.8753 19.7161 22.029 19.9895 22.3025C20.263 22.576 20.4167 22.9469 20.4167 23.3337V27.7087C20.4167 28.0954 20.5703 28.4664 20.8438 28.7399C21.1173 29.0133 21.4882 29.167 21.875 29.167H27.7083C28.0951 29.167 28.4661 29.0133 28.7395 28.7399C29.013 28.4664 29.1667 28.0954 29.1667 27.7087Z"
-                  stroke={`${location.pathname === '/maker-io' ? '#8A0000' : '#00727A'}`} strokeWidth="2"
+                  stroke={`${location.pathname === '/' ? '#8A0000' : '#00727A'}`} strokeWidth="2"
                   strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <span>Home</span>
@@ -36,7 +36,7 @@ export const DropdownMenu = ({user, cartItem, orders}) => {
                   Dashboard
                 </Link> :
                 <>
-                  <Link className="flex gap-x-2 justify-center" to={token ? "/makerio/cart" : "/login"}>
+                  <Link className="flex gap-x-2 justify-center" to={token ? "cart" : "/login"}>
                     <div
                       className="relative">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30" fill="none">
@@ -59,7 +59,7 @@ export const DropdownMenu = ({user, cartItem, orders}) => {
           {
             user['acc_type'] === 0 ? null :
               <>
-                <Link className="flex gap-x-2 justify-center items-center" to={token ? "/makerio/order" : "/login"}>
+                <Link className="flex gap-x-2 justify-center items-center" to={token ? "order" : "/login"}>
                   <div className="relative">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30" fill="none">
                       <path

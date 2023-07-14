@@ -56,7 +56,7 @@ export const MakerLanding = () => {
 
   return (
     <div className="flex flex-col gap-y-6 xl:py-6 lg:py-12 md:py-8 py-6">
-      <div className="min-[1920px]:px-48 flex flex-col gap-6 justify-center">
+      <div className="flex flex-col gap-6 justify-center">
         <div className="font-bold flex flex-col items-center gap-y-6">
           Product
         </div>
@@ -86,10 +86,10 @@ export const MakerLanding = () => {
           </div>
         </Dropdown>
       </div>
-      <div className="min-[1920px]:px-48 flex flex-col gap-6 justify-center">
+      <div className="flex flex-col gap-6 justify-center">
         {/*display item */}
         <div className="grid auto-rows-fr gap-12
-            min-[1920px]:grid-cols-5
+            min-[1880px]:grid-cols-4
             xl:grid-cols-4 xl:px-8
             lg:grid-cols-3
             md:grid-cols-2 md:px-12

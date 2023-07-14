@@ -56,8 +56,10 @@ export default function CheckoutButton() {
     return (
       <div key={"cart-pay-preview"}>
         <button
-          onClick={() => {token ? setModalOpen(true) : navigate('/login')}}
-          className={` transition duration-500 hover:shadow-blueBase hover:shadow-md bg-redHover text-[18px] text-whiteFactory px-4 py-1 rounded-[20px]`}>
+          onClick={() => {
+            token ? setModalOpen(true) : navigate('/login')
+          }}
+          className={`transition duration-500 hover:shadow-blueBase hover:shadow-md bg-redHover text-[18px] text-whiteFactory px-4 py-1 rounded-[20px] md:text-base text-sm`}>
           Check out
         </button>
 
@@ -131,8 +133,10 @@ export default function CheckoutButton() {
                       if (token) {
                         e.stopPropagation();
                         setSuccess(false);
-                        storeInvoice(totalPrice, cartItem, paymentPic, clearCart, setCartItem, setModalOpen, setSuccess);
-                        setPaymentPic('');
+                        storeInvoice(totalPrice, cartItem, paymentPic, clearCart, setCartItem, setModalOpen, setSuccess).then(() => {
+                          navigate('/order');
+                          setPaymentPic('');
+                        });
                       }
                     }}>
                     <span>Confirm</span>

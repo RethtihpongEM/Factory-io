@@ -7,33 +7,36 @@ import Tooltip, {tooltipClasses} from '@mui/material/Tooltip';
 import {styled} from '@mui/material/styles'
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import ProductContext from "../../context/ProductContext.jsx";
+import {AddToCart} from "../../components/ui/AddToCart.jsx";
+
 const imgUrl = import.meta.env.VITE_APP_URL;
 export const ItemCard = (props) => {
   const navigate = useNavigate()
   const {name, price, id, image, status} = props.item;
-  const {addToCart} = useContext(CartContext);
-  const [open, setOpen] = React.useState(false);
-  const CustomTooltip = styled(({className, ...props}) => (
-    <Tooltip {...props} arrow classes={{popper: className}}/>
-  ))({
-    [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: "white",
-      border: "1px solid #048D95",
-      fontSize: "12px",
-      maxWidth: "120px"
-    },
-    [`& .${tooltipClasses.arrow}`]: {
-      color: "#048D95",
-    },
-  });
-  const handleTooltipClose = () => {
-    setOpen(false);
-  };
-
-  const handleTooltipOpen = () => {
-    setOpen(true);
-    addToCart(props.item);
-  };
+  // const {addToCart} = useContext(CartContext);
+  //
+  // const [open, setOpen] = React.useState(false);
+  // const CustomTooltip = styled(({className, ...props}) => (
+  //   <Tooltip {...props} arrow classes={{popper: className}}/>
+  // ))({
+  //   [`& .${tooltipClasses.tooltip}`]: {
+  //     backgroundColor: "white",
+  //     border: "1px solid #048D95",
+  //     fontSize: "12px",
+  //     maxWidth: "120px"
+  //   },
+  //   [`& .${tooltipClasses.arrow}`]: {
+  //     color: "#048D95",
+  //   },
+  // });
+  // const handleTooltipClose = () => {
+  //   setOpen(false);
+  // };
+  //
+  // const handleTooltipOpen = () => {
+  //   props.item?.status === 1 && setOpen(true);
+  //   addToCart(props.item);
+  // };
 
   return (
     <>
@@ -41,10 +44,10 @@ export const ItemCard = (props) => {
       <div className="flex justify-center">
         <div
           className="min-[1920px]:max-w-[300px] xl:max-w-[260px] lg:max-w-[250px] md:max-w-[250px] max-w-[260px] shadow-2xl border-2 border-tealActive p-6 flex flex-col items-center">
-          <Link className="flex-1 text-center font-semibold" to={`/makerio/${id}`}>
+          <Link className="flex-1 text-center font-semibold" to={`/item/${id}`}>
             {name}
           </Link>
-          <Link className="flex-2" to={`/makerio/${id}`}>
+          <Link className="flex-2" to={`/item/${id}`}>
             {
               (image === null || image === undefined)
                 ?
@@ -65,27 +68,30 @@ export const ItemCard = (props) => {
                   {status === 1 ? 'In Stock' : 'Out of Stock'}
                 </span>
               </div>
-              <ClickAwayListener onClickAway={handleTooltipClose}>
-                <div>
-                  <CustomTooltip
-                    PopperProps={{
-                      disablePortal: true,
-                    }}
-                    onClose={handleTooltipClose}
-                    open={open}
-                    placement={"right"}
-                    disableFocusListener
-                    disableHoverListener
-                    title={<span className='text-tealBase'>Item has been added to cart</span>}
-                  >
-                    <button
-                      className={" rounded-[50%] px-1 py-1 hover:bg-tealActive active:bg-tealBase transition duration-300"}
-                      onClick={handleTooltipOpen}>
-                      <img loading={"lazy"} width="36" src="/assets/images/cart-icon.png" alt=""/>
-                    </button>
-                  </CustomTooltip>
-                </div>
-              </ClickAwayListener>
+              <AddToCart item={props.item} iconSize={"w-8"}/>
+              {/*<ClickAwayListener onClickAway={handleTooltipClose}>*/}
+              {/*  <div>*/}
+              {/*    <CustomTooltip*/}
+              {/*      PopperProps={{*/}
+              {/*        disablePortal: true,*/}
+              {/*      }}*/}
+              {/*      onClose={handleTooltipClose}*/}
+              {/*      open={open}*/}
+              {/*      placement={"right"}*/}
+              {/*      disableFocusListener*/}
+              {/*      disableHoverListener*/}
+              {/*      title={<span className='text-tealBase'>Item has been added to cart</span>}*/}
+              {/*    >*/}
+              {/*      <button*/}
+              {/*        className={`${props.item?.status === 0 && 'hidden'} rounded-[50%] px-1 py-1 hover:bg-tealActive active:bg-tealBase transition duration-300`}*/}
+              {/*        onClick={handleTooltipOpen}>*/}
+              {/*        <img loading={"lazy"} width="36" src="/assets/images/cart-icon.png" alt=""/>*/}
+              {/*      </button>*/}
+              {/*    </CustomTooltip>*/}
+              {/*  </div>*/}
+              {/*</ClickAwayListener>*/}
+
+
               {/*<Tooltip*/}
               {/*  */}
               {/*  arrow={false}*/}

@@ -4,6 +4,7 @@ import CartContext from "../../context/CartContext.jsx";
 import InvoiceContext from "../../context/InvoiceContext.jsx";
 import {useAuthContext} from "../../context/AuthContext.jsx";
 import ProductContext from "../../context/ProductContext.jsx";
+import {AddToCart} from "@/components/ui/AddToCart.jsx";
 
 const imgUrl = import.meta.env.VITE_APP_URL
 export const ItemCardCarousel = ({item}) => {
@@ -17,16 +18,16 @@ export const ItemCardCarousel = ({item}) => {
     <>
       {/*cart-item */}
       <div className="max-w-[250px] border border-[#59C3CB] p-6 flex flex-col items-center">
-        <Link className="flex-1 text-center font-semibold text-xs" onClick={()=>{
+        <Link className="flex-1 text-center font-semibold text-xs" onClick={() => {
           getItem(id)
           scrollTop(0)
-        }} to={`/makerio/${id}`}>
+        }} to={`/item/${id}`}>
           {name}
         </Link>
-        <Link className="flex-2" onClick={()=>{
+        <Link className="flex-2" onClick={() => {
           getItem(id)
           scrollTop(0)
-        }} to={`/makerio/${id}`}>
+        }} to={`/item/${id}`}>
           {
             (image === null || image === undefined)
               ? <img className="hover:scale-75 ease-in-out duration-300" src="/assets/images/makerio.png" alt={name}/>
@@ -44,18 +45,19 @@ export const ItemCardCarousel = ({item}) => {
                 {status === 1 ? 'In Stock' : 'Out of Stock'}
               </span>
             </div>
-            <button
-              className={" rounded-[50%] px-1 py-1 hover:bg-tealActive active:bg-tealBase transition duration-300"}
+            <AddToCart item={item} iconSize={"w-[36px]"}/>
+            {/*<button*/}
+            {/*  className={" rounded-[50%] px-1 py-1 hover:bg-tealActive active:bg-tealBase transition duration-300"}*/}
 
-              onClick={() => {
-                if (token) {
-                  addToCart(item);
-                } else {
-                  navigate('/login')
-                }
-              }}>
-              <img width="36" src="/assets/images/cart-icon.png" alt=""/>
-            </button>
+            {/*  onClick={() => {*/}
+            {/*    if (token) {*/}
+            {/*      addToCart(item);*/}
+            {/*    } else {*/}
+            {/*      navigate('/login')*/}
+            {/*    }*/}
+            {/*  }}>*/}
+            {/*  <img width="36" src="/assets/images/cart-icon.png" alt=""/>*/}
+            {/*</button>*/}
           </div>
         </div>
         {/*<div className="text-redBase text-sm">{!token &&*/}

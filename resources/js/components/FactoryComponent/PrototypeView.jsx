@@ -11,8 +11,8 @@ export const PrototypeView = ({prototype, id}) => {
     <>
       <Slide direction={"up"} in={true} unmountOnExit mountOnEnter>
         <section className={'flex flex-col'}>
-          <div className="flex gap-x-4 lg:flex-row flex-col border border-blackFactory  rounded-md gap-3 p-4">
-            <div className="flex flex-1 bg-grayFactory shadow-blueActive shadow-sm justify-center">
+          <div className="flex gap-x-4 lg:flex-row flex-col border border-blackFactory h-full rounded-md gap-3 p-4">
+            <div className="flex flex-1 bg-whiteFactory bg-opacity-50 shadow-blueActive rounded-md justify-center">
               <Carousel indicators={false}>
                 {prototype.image && Array.from(prototype.image)?.map((img, key) => {
                   return (

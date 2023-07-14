@@ -38,7 +38,7 @@ export const CustomerService = ({setModalOpen}) => {
       <div className="flex flex-col justify-center w-screen h-screen">
         <div className={"flex flex-col w-full h-screen justify-center items-center"}>
           <div
-            className="flex flex-col h-[80%] md:min-w-[700px] text-gray-800 bg-white border-blackFactory border shadow-xl rounded-lg overflow-hidden">
+            className="flex flex-col h-[80%] md:w-[60%] w-[90%] text-gray-800 bg-white border-blackFactory border shadow-xl rounded-lg overflow-hidden">
             <div className="flex justify-between bg-blueBase text-whiteFactory px-4 py-2">
               <div>
                 Customer Service
