@@ -17,12 +17,12 @@ export const DashboardProjectCard = ({project}) => {
   const [curExp, setCurExp] = useState('');
 
   return (
-    <div className={"flex gap-4"}>
-      <section className={"max-w-[400px]"}>
+    <div className={"grid grid-cols-[1fr_2fr_1fr] gap-4"}>
+      <section className={""}>
         <Carousel>
           {projectImages?.map(proj => {
             return (
-              <div className={"flex justify-center relative border"} key={proj?.id}>
+              <div className={"flex justify-center relative"} key={proj?.id}>
                 <button onClick={(e) => {
                   e.stopPropagation()
                   setExpandImg(true)
@@ -36,27 +36,38 @@ export const DashboardProjectCard = ({project}) => {
           })}
         </Carousel>
       </section>
-      <section>
-        <p>Name: {project?.name}</p>
-        <p>Description: {project?.description}</p>
-        <p>Target Fund: {project?.target_fund}</p>
-        <p>Deadline: {project?.project_deadline.slice(0, 10)}</p>
-        <p>Like count: {project?.like_count}</p>
-        <p>Comment count: {project?.comment_count}</p>
-        <p>Save count: {project?.save_count}</p>
-        <div className={"flex gap-4"}>
-          <ProjectStar project={project}/>
-          <ProjectComment project={project}/>
-          <ProjectSave project={project}/>
+      <section className={"flex flex-col gap-2 p-4"}>
+        <div className={"border-b-2 border-grayFactory pb-4"}>
+          <p className={"font-semibold"}>{project?.name}</p>
+          <p className={"text-sm"}>{project?.description}</p>
+        </div>
+        <div className={"border-b-2 border-grayFactory pb-4"}>
+          <p>Target Fund: <span className={"text-redHover font-semibold"}>${project?.target_fund}</span></p>
+          <p>Project's Deadline: {project?.project_deadline.slice(0, 10)}</p>
+        </div>
+        <div className={"flex justify-evenly gap-4 mt-auto"}>
+          <div className={"flex gap-2 items-center justify-center"}>
+            <ProjectStar project={project}/>
+            <span className={"font-semibold text-sm"}>{project?.like_count}</span>
+          </div>
+          <div className={"flex gap-2 items-center justify-center"}>
+            <ProjectComment project={project}/>
+            <span className={"font-semibold text-sm"}>{project?.comment_count}</span>
+          </div>
+          <div className={"flex gap-2 items-center justify-center"}>
+            <ProjectSave project={project}/>
+            <span className={"font-semibold text-sm"}>{project?.save_count}</span>
+          </div>
         </div>
       </section>
       <section className={"flex"}>
-        <button className={"p-4 bg-redBase text-whiteFactory"} onClick={(e) => {
+        <button className={"w-fit p-4 bg-redBase text-whiteFactory"} onClick={(e) => {
           e.stopPropagation();
           setModalOpen(true)
         }}>Delete
         </button>
-        <Link to={`/project/${project?.id}`} className={"p-4 flex justify-center items-center bg-blueBase text-whiteFactory"} onClick={(e) => {
+        <Link to={`/project/${project?.id}`}
+              className={"p-4 flex w-fit justify-center items-center bg-blueBase text-whiteFactory"} onClick={(e) => {
           e.stopPropagation();
           setModalOpen(true)
         }}>

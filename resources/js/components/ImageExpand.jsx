@@ -34,7 +34,18 @@ export const ImageExpand = ({open, setOpen, imgSrc}) => {
         <Box sx={style}>
           <Typography variant="div" id="modal-modal-description">
             <div className="w-full h-full flex justify-center items-center">
-              <div className={"flex justify-center items-center w-[65%] aspect-video"}>
+              <div className={"relative flex justify-center items-center w-[65%] aspect-video"}>
+                <button
+                  className="absolute top-1 right-1 transition bg-whiteFactory duration-300 rounded-[50%] hover:bg-opacity-50"
+                  onClick={event => {
+                    event.stopPropagation();
+                    setOpen(false);
+                  }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                       stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
                 <img className={"object-contain"} src={imgSrc} alt=""/>
               </div>
             </div>

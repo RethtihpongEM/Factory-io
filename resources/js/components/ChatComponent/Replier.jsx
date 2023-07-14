@@ -1,21 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import AdminPopUp from "../Modals/AdminPopUp.jsx";
 import {ImageExpand} from "../ImageExpand.jsx";
+
 const imgUrl = import.meta.env.VITE_APP_URL;
 export const Replier = (props) => {
   const {messageContent, time, image, setModalOpen} = props;
-  const [handleExpand, setHandleExpand] = useState(false);
+  const [imgExpandReply, setImgExpandReply] = useState(false);
   const timePrefix = new Date(time).getHours();
 
-  const ImageContent = () => {
-    return (
-      <img onClick={(e) => {
-        e.stopPropagation();
-        setHandleExpand(true)
-      }} className="md:max-w-[250px] max-w-[156px] object-contain" src={`${imgUrl}/${image}`} alt=""/>
-    );
-  }
+  // const ImageContent = () => {
+  //   return (
+  //     <img onClick={(e) => {
+  //       e.stopPropagation();
+  //       setImgExpandReply(true)
+  //     }} className="md:max-w-[250px] max-w-[156px] object-contain" src={`${imgUrl}/${image}`} alt=""/>
+  //   );
+  // }
 
   return (
     <>
@@ -36,14 +37,16 @@ export const Replier = (props) => {
           <div
             className={`${image ? 'p-0' : 'p-3'} ${messageContent ? 'bg-gray-300' : 'bg-transparent'} rounded-r-lg rounded-bl-lg`}>
             <p className={`${image && 'p-3'} text-sm`}>{messageContent}</p>
-            {image &&
-              <img onClick={(e) => {
-                e.stopPropagation();
-                setHandleExpand(true)
-              }}
-                   className="cursor-pointer md:max-w-[250px] max-w-[156px] object-contain"
-                   src={`${imgUrl}/${image}`} alt=""/>}
-            <ImageExpand open={handleExpand} imgSrc={`${imgUrl}/${image}`} setOpen={setHandleExpand}/>
+            <span>
+              {image &&
+                <img onClick={(e) => {
+                  e.stopPropagation();
+                  setImgExpandReply(true)
+                }} className="cursor-pointer md:max-w-[250px] max-w-[156px] object-contain"
+                     src={`${imgUrl}/${image}`} alt=""/>
+              }
+              <ImageExpand open={imgExpandReply} imgSrc={`${imgUrl}/${image}`} setOpen={setImgExpandReply}/>
+            </span>
           </div>
           <span
             className="text-xs text-gray-500 leading-none">{time.slice(10).slice(0, 6)}{timePrefix >= 12 ? ' PM' : ' AM'}</span>
