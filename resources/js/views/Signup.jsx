@@ -5,6 +5,7 @@ import {useRef, useState} from "react";
 import axiosClient from "../axios-client.js";
 import {useNavigate} from "react-router-dom";
 import {useAuthContext} from "../context/AuthContext.jsx";
+import {Spinner} from "flowbite-react";
 
 export default function Signup() {
   const firstNameRef = useRef();
@@ -17,6 +18,7 @@ export default function Signup() {
 
   const [errors, setErrors] = useState(null)
   const {setUser, setToken, token} = useAuthContext()
+
   const onSubmit = (event) => {
     event.preventDefault()
     const formValues = {
@@ -57,7 +59,8 @@ export default function Signup() {
         </div>
         <form className="m-auto flex flex-col gap-12" onSubmit={onSubmit}>
           <div className="text-tealHover text-center font-bold md:text-5xl text-3xl
-          ">Create a new account</div>
+          ">Create a new account
+          </div>
           {/*{*/}
           {/*  errors && <div className="text-white text-semibold mb-5 p-5 bg-red-500 rounded-[4px]">*/}
           {/*    {Object.keys(errors).map(key => (*/}
@@ -125,8 +128,8 @@ export default function Signup() {
                      placeholder="Password"
               />
               <span className='text-redHover self-start text-xs'>
-                  {errors && errors?.password?.map(error => error)}
-                </span>
+                  {errors && errors?.password?.map(error => <span>{error}<br/></span>)}
+              </span>
             </div>
             <div className="mb-6 w-full">
               <input type="password" id="confpassword"
@@ -136,10 +139,10 @@ export default function Signup() {
               />
             </div>
             <div className="flex md:flex-row flex-col items-center justify-between w-full gap-2">
-                <button
-                  className="font-bold text-center text-blackFactory border border-redBase md:px-[35px] md:py-[7px] md:text-base text-sm whitespace-nowrap px-4 py-2 rounded-[4px] shadow-2xl md:w-fit w-full">
-                  Create account
-                </button>
+              <button
+                className="font-bold text-center text-blackFactory border border-redBase md:px-[35px] md:py-[7px] md:text-base text-sm whitespace-nowrap px-4 py-2 rounded-[4px] shadow-2xl md:w-fit w-full">
+                Create account
+              </button>
               <div className="flex gap-x-1 md:text-base text-sm">
                 <p className={"whitespace-nowrap"}>Already a member?</p>
                 <Link to="/login"

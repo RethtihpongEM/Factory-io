@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {GoogleMapsContext} from "../../context/GoogleMapsContext.jsx";
 import AdminPopUp from "./AdminPopUp.jsx";
 import {useAuthContext} from "../../context/AuthContext.jsx";
+import {Spinner} from "flowbite-react";
 
 function AddressPopUp({modalOpen, setModalOpen}) {
   const {user} = useAuthContext();
@@ -23,7 +24,11 @@ function AddressPopUp({modalOpen, setModalOpen}) {
     deleteAddress,
     errors,
     setErrors,
-    addressExist
+    addressExist,
+    isPostAddress,
+    setIsPostAddress,
+    isDeleteAddress,
+    setIsDeleteAddress,
   } = useContext(GoogleMapsContext);
   const ref = useRef();
 
@@ -82,15 +87,17 @@ function AddressPopUp({modalOpen, setModalOpen}) {
               </div>
               {!editBtn ?
                 <div className={"flex justify-center"}>
-                  <button onClick={(e) => {
-                    e.stopPropagation()
-                    storeAddress(currentAddress).then(() => {
-                      setEditBtn(false);
-                      setCurrentAddress({...currentAddress, address: ''})
-                    })
-                  }}
+                  <button disabled={isPostAddress || false}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            storeAddress(currentAddress).then(() => {
+                              setEditBtn(false);
+                              setCurrentAddress({...currentAddress, address: ''})
+                            })
+                          }}
                           className={`w-fit mx-auto font-bold text-center text-blackFactory border border-redBase px-4 py-2 rounded-md shadow-2xl md:text-base text-xs`}>
                     Create new
+                    {isPostAddress && <span className={"ml-2"}><Spinner color={"purple"} size={"md"}/></span>}
                   </button>
 
                   <div className={"absolute bottom-[-24px] text-sm text-redBase"}>
@@ -107,12 +114,13 @@ function AddressPopUp({modalOpen, setModalOpen}) {
                           className={`w-full mx-auto font-bold text-center text-blackFactory border border-redBase px-4 py-2 rounded-[4px] shadow-2xl md:text-base text-xs`}>
                     Cancel
                   </button>
-                  <button onClick={(e) => {
+                  <button disabled={isPostAddress || false} onClick={(e) => {
                     e.stopPropagation()
                     editAddress(currentAddress, setCurrentAddress)
                   }}
                           className={`w-full mx-auto font-bold text-center text-blackFactory border border-redBase px-4 py-2 rounded-[4px] shadow-2xl md:text-base text-xs`}>
                     Edit
+                    {isPostAddress && <span className={"ml-2"}><Spinner color={"purple"} size={"md"}/></span>}
                   </button>
                 </div>}
               <div className={"xl:text-base text-sm"}>
@@ -120,7 +128,8 @@ function AddressPopUp({modalOpen, setModalOpen}) {
                   <div>No delivery address</div>}
                 {addresses?.filter(address => address.user_id === user.id).map((address, key) => {
                   return (
-                    <div key={key} className="flex md:flex-row flex-col gap-2 md:gap-4 justify-between border-b-2 px-4 py-2">
+                    <div key={key}
+                         className="flex md:flex-row flex-col gap-2 md:gap-4 justify-between border-b-2 px-4 py-2">
                       <p className=''>{address.address}</p>
                       <div className="flex flex-row md:justify-normal justify-end gap-4">
                         <button onClick={(e) => {
@@ -132,10 +141,12 @@ function AddressPopUp({modalOpen, setModalOpen}) {
                           ref.current.focus();
                         }} className="text-tealActive hover:underline">Edit
                         </button>
-                        <button onClick={(e) => {
-                          e.stopPropagation()
-                          deleteAddress(address.id)
-                        }} className="text-redActive hover:underline">Delete
+                        <button disabled={isDeleteAddress || false} onClick={(e) => {
+                          // e.stopPropagation()
+                          // setIsPostAddress(false)
+                          deleteAddress(address?.id)
+                        }} className="text-redActive hover:underline">
+                          Delete {isDeleteAddress && <span className={"ml-2"}><Spinner color={"purple"} size={"md"}/></span>}
                         </button>
                       </div>
                     </div>

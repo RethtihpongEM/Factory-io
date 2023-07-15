@@ -9,7 +9,7 @@ import {useAuthContext} from "./AuthContext.jsx";
 import {useQuery} from "@tanstack/react-query";
 import {isRouteErrorResponse} from "react-router-dom";
 
-Axios.defaults.baseURL = import.meta.env.VITE_APP_URL+"/api/v1/";
+Axios.defaults.baseURL = import.meta.env.VITE_APP_URL + "/api/v1/";
 
 export const GoogleMapsContext = createContext();
 const libraries = ['places'];
@@ -70,11 +70,17 @@ export const GoogleMapsProvider = ({children}) => {
       })
   }
 
+  const [isPostAddress, setIsPostAddress] = useState(false);
+
   const storeAddress = async (postAddress) => {
     if (!addressExist) {
+      setIsPostAddress(true)
       try {
-        await Axios.post('addresses', postAddress).then(res => res)
-        await addressesReFetch()
+        await Axios.post('addresses', postAddress).then(async (res) => {
+          await addressesReFetch()
+          setIsPostAddress(false);
+          return res
+        })
       } catch (e) {
         setErrors(e.response.data.errors)
         // console.log(e.response.data.errors)
@@ -82,6 +88,7 @@ export const GoogleMapsProvider = ({children}) => {
     } else {
       setErrors([{...errors, addressExist: 'That address is already in your list'}])
     }
+    setIsPostAddress(false);
   }
 
   const getUserAddress = async (id) => {
@@ -99,28 +106,35 @@ export const GoogleMapsProvider = ({children}) => {
     }
   }
 
-  const deleteAddress = (addressID) => {
+  const [isDeleteAddress, setIsDeleteAddress] = useState(false);
+  const deleteAddress = async (addressID) => {
     try {
-      Axios.delete(`addresses/${addressID}`).then(() => {
-        addressesReFetch()
+      setIsDeleteAddress(true);
+      await Axios.delete(`addresses/${addressID}`).then(async () => {
+        setIsDeleteAddress(false);
+        await addressesReFetch()
       })
     } catch (e) {
       setErrors(e.response.data.errors)
       // console.log(e)
     }
+    setIsDeleteAddress(false);
   }
 
   const editAddress = async (currentAddress, setCurrentAddress) => {
     try {
+      setIsPostAddress(true);
       await Axios.put(`addresses/${currentAddress?.id}`, currentAddress).then((res) => {
         addressesReFetch()
       }).then(res => {
+        setIsPostAddress(false);
         setCurrentAddress({...currentAddress, address: ''})
       })
     } catch (e) {
       setErrors(e.response.data.errors)
       // console.log(e)
     }
+    setIsPostAddress(false);
   }
   const PlacesAutoComplete = ({setMarker}) => {
     const {
@@ -137,7 +151,7 @@ export const GoogleMapsProvider = ({children}) => {
       const {lat, lng} = await getLatLng(results[0]);
       setLatitude(lat);
       setLongitude(lng);
-      getAddress(lat,lng);
+      getAddress(lat, lng);
       setMarker([{lat, lng}]);
     };
     return (
@@ -246,6 +260,10 @@ export const GoogleMapsProvider = ({children}) => {
   return (
     <>
       <GoogleMapsContext.Provider value={{
+        isDeleteAddress,
+        setIsDeleteAddress,
+        isPostAddress,
+        setIsPostAddress,
         getLtLgPl,
         editAddress,
         addressExist,

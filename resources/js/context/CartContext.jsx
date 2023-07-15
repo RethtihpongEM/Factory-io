@@ -12,7 +12,7 @@ import UserContext from "./UserContext.jsx";
 Axios.defaults.baseURL = import.meta.env.VITE_APP_URL+"/api/v1/";
 const CartContext = createContext();
 export const CartProvider = ({children}) => {
-  const {isLoading} = useContext(InvoiceContext);
+  // const {isLoading} = useContext(InvoiceContext);
   const [itemQty, setItemQty] = useState('');
   const [cartItem, setCartItem] = useState([]);
   const [cartError, setCartError] = useState([]);
