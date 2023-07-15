@@ -18,8 +18,9 @@ export default function Signup() {
 
   const [errors, setErrors] = useState(null)
   const {setUser, setToken, token} = useAuthContext()
+  const [isSignLoading, setIsSignLoading] = useState(false);
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault()
     const formValues = {
       email: emailRef.current.value,
@@ -30,9 +31,11 @@ export default function Signup() {
       phoneNumber: phoneNumberRef.current.value,
       username: usernameRef.current.value,
     }
-    // console.log(formValues)
-    axiosClient.post('/signup', formValues)
+    setIsSignLoading(true);
+    console.log(formValues)
+    await axiosClient.post('/signup', formValues)
       .then(({data}) => {
+        setIsSignLoading(false);
         setUser(data.user)
         setToken(data.token)
         history.back()
@@ -43,6 +46,7 @@ export default function Signup() {
           setErrors(response.data.errors)
         }
       })
+    setIsSignLoading(false);
   }
   if (!token) {
     return (
@@ -139,9 +143,10 @@ export default function Signup() {
               />
             </div>
             <div className="flex md:flex-row flex-col items-center justify-between w-full gap-2">
-              <button
-                className="font-bold text-center text-blackFactory border border-redBase md:px-[35px] md:py-[7px] md:text-base text-sm whitespace-nowrap px-4 py-2 rounded-[4px] shadow-2xl md:w-fit w-full">
+              <button disabled={isSignLoading || false}
+                      className="font-bold text-center text-blackFactory border border-redBase md:px-[35px] md:py-[7px] md:text-base text-sm whitespace-nowrap px-4 py-2 rounded-[4px] shadow-2xl md:w-fit w-full">
                 Create account
+                {isSignLoading && <span className={"ml-2"}><Spinner color={"purple"} size={"md"}/></span>}
               </button>
               <div className="flex gap-x-1 md:text-base text-sm">
                 <p className={"whitespace-nowrap"}>Already a member?</p>

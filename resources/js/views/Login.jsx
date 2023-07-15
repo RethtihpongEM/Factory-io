@@ -6,6 +6,7 @@ import {useContext, useEffect, useRef, useState} from "react";
 import {useAuthContext} from "../context/AuthContext.jsx";
 import axiosClient from "../axios-client.js";
 import UserContext from "../context/UserContext.jsx";
+import {Spinner} from "flowbite-react";
 
 export default function Login() {
   const emailRef = useRef();
@@ -18,15 +19,20 @@ export default function Login() {
     getAdmin()
   }, [])
 
-  const onSubmit = (ev) => {
+
+  const [isSignin, setIsSignin] = useState(false);
+
+  const onSubmit = async (ev) => {
     ev.preventDefault()
     const formValues = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     }
+    setIsSignin(true);
     if (admin['email'] === emailRef.current.value) {
-      axiosClient.post('/loginAsAdmin', formValues)
+      await axiosClient.post('/loginAsAdmin', formValues)
         .then(({data}) => {
+          setIsSignin(false);
           setUser(data.user)
           setToken(data.token)
           navigate("/admin/dashboard")
@@ -44,14 +50,14 @@ export default function Login() {
           }
         })
     } else {
-      axiosClient.post('/login', formValues)
+      await axiosClient.post('/login', formValues)
         .then(({data}) => {
+          setIsSignin(false);
           setUser(data.user)
           setToken(data.token)
           history.back()
         })
         .catch(err => {
-
           const response = err.response
           if (response && response.status === 422) {
             if (response.data.errors) {
@@ -64,6 +70,7 @@ export default function Login() {
           }
         })
     }
+    setIsSignin(false);
   }
 
   if (!token) {
@@ -112,9 +119,10 @@ export default function Login() {
                 </span>
               </div>
               <div className="flex md:justify-between md:items-center md:flex-row md:gap-0 flex-col gap-3">
-                <button
-                  className="font-bold text-center text-blackFactory border border-redBase rounded-[4px] shadow-2xl md:px-[35px] md:py-[7px] md:w-fit w-full py-2">
+                <button disabled={isSignin || false}
+                        className="font-bold text-center text-blackFactory border border-redBase rounded-[4px] shadow-2xl md:px-[35px] md:py-[7px] md:w-fit w-full py-2">
                   Sign In
+                  {isSignin && <span className={"ml-2"}><Spinner color={"purple"} size={"md"}/></span>}
                 </button>
                 <div className="">
                   <div className="justify-center flex gap-x-1">
