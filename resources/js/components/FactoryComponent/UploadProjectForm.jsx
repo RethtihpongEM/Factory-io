@@ -3,16 +3,17 @@ import React, {useEffect, useState} from "react";
 import {useAuthContext} from "../../context/AuthContext.jsx";
 import {ProposalTab} from "./Tabs/ProposalTab.jsx";
 import {ProjectTab} from "./Tabs/ProjectTab.jsx";
-import {FilePond, registerPlugin} from 'react-filepond'
-// import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import 'filepond/dist/filepond.min.css'
-// import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import AdminPopUp from "../Modals/AdminPopUp.jsx";
 import {Carousel} from "flowbite-react"
-
-registerPlugin(FilePondPluginFileValidateType)
-const filePondUrl = import.meta.env.VITE_APP_URL;
+//
+// import {FilePond, registerPlugin} from 'react-filepond'
+// // import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+// import 'filepond/dist/filepond.min.css'
+// // import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'
+// import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+//
+// registerPlugin(FilePondPluginFileValidateType)
+// const filePondUrl = import.meta.env.VITE_APP_URL;
 export const UploadProjectForm = ({setModalOpen, modalOpen}) => {
   const {
     postProject,
@@ -188,25 +189,26 @@ export const UploadProjectForm = ({setModalOpen, modalOpen}) => {
           </div>
           <div className={'w-full flex flex-col gap-4 px-4'}>
             <div className="self-end w-full">
-              <FilePond
-                styleButtonRemoveItemAlign={false}
-                files={file}
-                acceptedFileTypes={['application/x-zip-compressed' /*validate zip*/,
-                  'application/pdf' /* validate pdf*/,
-                  'application/x-7z-compressed' /*validate 7zip files*/,
-                  'application/x-gzip' /*validate gzip files*/,
-                  'application/x-tar' /*validate tar files*/,
-                ]}
-                server={{
-                  process: `${filePondUrl}/api/v1/tmp-post`,
-                  revert: `${filePondUrl}/api/v1/tmp-delete`,
-                }}
-                onupdatefiles={(e) => {
-                  setFile(e)
-                  handleFile(e)
-                }}
-                allowDrop={true}
-                allowMultiple={true} maxFiles={1}/>
+              {/*<FilePond*/}
+              {/*  styleButtonRemoveItemAlign={false}*/}
+              {/*  files={file}*/}
+              {/*  acceptedFileTypes={['application/x-zip-compressed',*/}
+              {/*    'application/pdf',*/}
+              {/*    'application/x-7z-compressed',*/}
+              {/*    'application/x-gzip',*/}
+              {/*    'application/x-tar',*/}
+              {/*  ]}*/}
+              {/*  server={{*/}
+              {/*    process: `${filePondUrl}/api/v1/tmp-post`,*/}
+              {/*    revert: `${filePondUrl}/api/v1/tmp-delete`,*/}
+              {/*  }}*/}
+              {/*  onupdatefiles={(e) => {*/}
+              {/*    setFile(e)*/}
+              {/*    handleFile(e)*/}
+              {/*  }}*/}
+              {/*  allowDrop={true}*/}
+              {/*  allowMultiple={true} maxFiles={1}/>*/}
+
               <div
                 className={`${!errors?.file && 'hidden'} mt-2 text-redBase text-xs`}>{errors?.file?.map(error => error)}</div>
             </div>
