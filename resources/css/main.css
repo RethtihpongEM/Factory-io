@@ -33,7 +33,7 @@ main {
 }
 
 .search-bar {
-  background: url('/assets/images/material-symbols_search.png') center left 10px no-repeat;
+  background: url('../js/assets/images/material-symbols_search.png') center left 10px no-repeat;
 }
 
 .highlight-hover:hover {
