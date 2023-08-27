@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import DonateContext from "../context/DonateContext.jsx";
-import {FilePond} from "react-filepond";
+// import {FilePond} from "react-filepond";
 import {ProposalTab} from "../components/FactoryComponent/Tabs/ProposalTab.jsx";
 import {ProjectTab} from "../components/FactoryComponent/Tabs/ProjectTab.jsx";
 import {Slide} from "@mui/material";

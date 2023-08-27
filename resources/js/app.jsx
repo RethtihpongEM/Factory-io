@@ -2,7 +2,7 @@ import './bootstrap';
 import React, {Suspense} from "react";
 import ReactDOM from "react-dom/client";
 
-import "../css/main.css";
+import "./assets/styles/main.css";
 import {RouterProvider} from "react-router-dom";
 import router from "./router.jsx";
 import {AuthContext} from "./context/AuthContext.jsx";
